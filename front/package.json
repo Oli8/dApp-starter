@@ -29,7 +29,7 @@
     "ethers": "^5.4.7",
     "node-sass": "^6.0.1",
     "sirv-cli": "^1.0.0",
-    "spaper": "^0.1.2",
+    "spaper": "^0.2.4",
     "svelte-spa-router": "^3.2.0"
   }
 }

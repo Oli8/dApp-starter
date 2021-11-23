@@ -7,7 +7,7 @@
   import ConnectButton from './components/ConnectButton.svelte'
 </script>
 
-<Navbar>
+<Navbar class="padding">
   <h3 slot="brand">
     <a href="/#/">dApp Starter</a>
   </h3>
@@ -36,9 +36,3 @@
 <main class="paper">
   <Router {routes} />
 </main>
-
-<style>
-:global(.split-nav a.paper-btn) {
-  display: inline;
-}
-</style>
