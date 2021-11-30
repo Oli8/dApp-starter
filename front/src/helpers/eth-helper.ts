@@ -1,24 +1,23 @@
 import { providers, Contract,
-         ContractTransaction } from 'ethers';
-import { SOME_CONTRACT_ADDRESS,
-         SOME_CONTRACT_ABI } from '../contracts/some_contract';
+         ContractTransaction } from 'ethers'
+// import { SomeContract } from '../contracts'
 
 export type Address = `0x${string}`;
 
 const readProvider: providers.InfuraProvider = new providers.InfuraProvider('ropsten');
-const contract: Contract = new Contract(
-  SOME_CONTRACT_ADDRESS,
-  SOME_CONTRACT_ABI,
-  readProvider
-);
+// const contract: Contract = new Contract(
+//   SomeContract.address,
+//   SomeContract.ABI,
+//   readProvider
+// );
 
 let provider: providers.Web3Provider;
 let contractWithSigner: Contract;
 let signer: providers.JsonRpcSigner;
 
-contract.on('Certified', (name: string) => {
-  alert(`${name} est maintenant certifié Punkiest Place to Work`);
-});
+// contract.on('event', (_: string) => {
+//   alert('Something happened :o');
+// });
 
 (() => {
   if (!window.ethereum) return;
@@ -26,8 +25,11 @@ contract.on('Certified', (name: string) => {
   provider = new providers.Web3Provider(window.ethereum, 'any');
   signer = provider.getSigner();
 
-  contractWithSigner = new Contract(SOME_CONTRACT_ADDRESS, SOME_CONTRACT_ABI, provider)
-                                   .connect(signer)
+  // contractWithSigner = new Contract(
+    // SomeContract.address,
+    // SomeContract.ABI,
+    // provider
+  // ).connect(signer)
 })()
 
 export async function connectWallet(): Promise<Address> {
