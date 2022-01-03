@@ -49,6 +49,15 @@ export async function getConnectedWallet(): Promise<Address> {
   }
 }
 
+export async function getEthBalance(account: Address): Promise<number> {
+  try {
+    const balance = await provider.getBalance(account);
+    return fromWei(balance.toHexString());
+  } catch (error) {
+    return 0;
+  }
+}
+
 export async function getChain(): Promise<number> {
   try {
     const { chainId } = await provider.getNetwork();

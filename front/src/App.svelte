@@ -1,9 +1,11 @@
 <script lang="ts">
   import Router from 'svelte-spa-router'
   import routes from './routes'
+  import { connected, onRopsten, userBalance } from './store'
   import TxModal from './components/TxModal.svelte'
   import { Navbar, Button } from 'spaper'
   import ConnectButton from './components/ConnectButton.svelte'
+  import Balance from './components/Balance.svelte'
 </script>
 
 <Navbar class="padding">
@@ -26,6 +28,11 @@
     <li>
       <ConnectButton />
     </li>
+    {#if $connected && $onRopsten}
+      <li>
+        <Balance amount={$userBalance} />
+      </li>
+    {/if}
   </ul>
 </Navbar>
 
