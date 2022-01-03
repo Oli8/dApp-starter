@@ -1,5 +1,5 @@
-import type { Network } from "@ethersproject/networks";
-import { derived, Readable, writable, Writable } from "svelte/store";
+import type { Network } from '@ethersproject/networks';
+import { derived, Readable, writable, Writable } from 'svelte/store';
 import type { Address } from './helpers/eth-helper'
 import { getConnectedWallet, getChain, provider } from './helpers/eth-helper'
 

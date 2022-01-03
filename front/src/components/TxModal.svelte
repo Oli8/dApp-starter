@@ -2,7 +2,7 @@
   import { Modal } from 'spaper'
   import Loader from './Loader.svelte'
   import { showTxModal, pendingTx,
-           txHash, txTitle } from "../store"
+           txHash, txTitle } from '../store'
 </script>
 
 <Modal bind:active={$showTxModal}

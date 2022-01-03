@@ -1,8 +1,8 @@
-import type { ContractTransaction } from "@ethersproject/contracts"
-import { showTxModal, pendingTx, txHash, txTitle } from "../store"
+import type { ContractTransaction } from '@ethersproject/contracts'
+import type { Transaction } from '@ethersproject/transactions'
 import type { Address } from './eth-helper'
+import { showTxModal, pendingTx, txHash, txTitle } from '../store'
 import { provider } from './eth-helper'
-import type { Transaction } from "@ethersproject/transactions"
 import { Toast } from 'spaper'
 
 interface TxError extends Error {
