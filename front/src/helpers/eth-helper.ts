@@ -59,10 +59,12 @@ export async function getChain(): Promise<number> {
 }
 
 export function toWei(amount: number): string {
+  // ethers amount to wei in hexadecimal format
   return utils.parseEther(String(amount)).toHexString();
 }
 
 export function fromWei(amount: string): number {
+  // hexadecimal wei amount to ethers
   return Number(utils.formatEther(amount));
 }
 
