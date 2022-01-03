@@ -2,9 +2,8 @@ import type { ContractTransaction } from "@ethersproject/contracts"
 import { showTxModal, pendingTx, txHash, txTitle } from "../store"
 import type { Address } from './eth-helper'
 import { provider } from './eth-helper'
-import { notifier } from '@beyonk/svelte-notifications'
-import type { Notifier } from '../types/notifier'
 import type { Transaction } from "@ethersproject/transactions"
+import { Toast } from 'spaper'
 
 interface TxError extends Error {
   code?: number|string;
@@ -39,19 +38,20 @@ export async function handleTxWithUx(
   if (!success) {
     showTxModal.set(false);
     const { code } = data as TxError;
-    let errorMessage = 'Une erreur est survenue.';
     if (code === 4001) { // Denied by user
       return;
     }
-    errorMessage += ` ${(data as TxError).message}`
-
-    return (notifier as Notifier).danger(errorMessage);
+    // TODO: use .error when available
+    return Toast.danger({
+      message: `Une erreur est survenue. ${data}`,
+      indefinite: true
+    });
   }
   const hash = (data as ContractTransaction).hash as Address
   txHash.set(hash);
   pendingTx.set(true);
   provider.once(hash, (_t: Transaction) => {
-    (notifier as Notifier).success('Transaction confirmée !');
+    Toast.success('Transaction confirmée !');
     pendingTx.set(false);
   });
   onEnd?.();
@@ -59,6 +59,8 @@ export async function handleTxWithUx(
 
 function parseErrorMessage(error: TxError) {
   const { code, message } = error;
+  if (code === 'INSUFFICIENT_FUNDS')
+    return 'Fonds insuffisants.'
   if (typeof code === 'number')
     return error
 
