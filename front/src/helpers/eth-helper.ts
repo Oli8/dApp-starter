@@ -58,6 +58,14 @@ export async function getChain(): Promise<number> {
   }
 }
 
+export function toWei(amount: number): string {
+  return utils.parseEther(String(amount)).toHexString();
+}
+
+export function fromWei(amount: string): number {
+  return Number(utils.formatEther(amount));
+}
+
 // export async function someContractFunction(arg: any): Promise<ContractTransaction> {
 //   return contractWithSigner.someFunction(arg);
 // }
