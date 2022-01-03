@@ -1,7 +1,6 @@
 <script lang="ts">
   import Router from 'svelte-spa-router'
   import routes from './routes'
-  import { NotificationDisplay } from '@beyonk/svelte-notifications';
   import TxModal from './components/TxModal.svelte'
   import { Navbar, Button } from 'spaper'
   import ConnectButton from './components/ConnectButton.svelte'
@@ -30,7 +29,6 @@
   </ul>
 </Navbar>
 
-<NotificationDisplay timeout={5000} />
 <TxModal />
 
 <main class="paper">
