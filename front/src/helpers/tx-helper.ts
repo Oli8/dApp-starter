@@ -35,26 +35,31 @@ export async function handleTxWithUx(
     params
   );
 
-  if (!success) {
-    showTxModal.set(false);
-    const { code } = data as TxError;
-    if (code === 4001) { // Denied by user
-      return;
+  return new Promise((resolve, reject) => {
+    if (!success) {
+      showTxModal.set(false);
+      const { code } = data as TxError;
+      reject(code);
+      if (code === 4001) { // Denied by user
+        return;
+      }
+      // TODO: use .error when available
+      return Toast.danger({
+        message: `Une erreur est survenue. ${data}`,
+        indefinite: true
+      });
     }
-    // TODO: use .error when available
-    return Toast.danger({
-      message: `Une erreur est survenue. ${data}`,
-      indefinite: true
+    const hash = (data as ContractTransaction).hash as Address
+    txHash.set(hash);
+    pendingTx.set(true);
+    provider.once(hash, async (t: Transaction) => {
+      Toast.success('Transaction confirmée !');
+      pendingTx.set(false);
+      showTxModal.set(false);
+      resolve(t);
+      await onEnd?.();
     });
-  }
-  const hash = (data as ContractTransaction).hash as Address
-  txHash.set(hash);
-  pendingTx.set(true);
-  provider.once(hash, (_t: Transaction) => {
-    Toast.success('Transaction confirmée !');
-    pendingTx.set(false);
-  });
-  onEnd?.();
+  })
 }
 
 function parseErrorMessage(error: TxError) {
