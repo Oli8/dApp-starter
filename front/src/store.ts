@@ -14,6 +14,8 @@ export const pendingTx: Writable<boolean> = writable(false);
 export const txHash: Writable<Address> = writable(null);
 export const txTitle: Writable<string> = writable('');
 
+const ROPSTEN_ID = 3;
+
 export const connected: Readable<boolean> = derived(
   selectedAccount,
   $selectedAccount => !!$selectedAccount
@@ -22,6 +24,12 @@ export const onRopsten: Readable<boolean> = derived(
   chainId,
   $chainId => $chainId === 3
 );
+// Can't derived from derived
+export const userReady: Readable<boolean> = derived(
+  [selectedAccount, chainId],
+  ([$selectedAccount, $chainId]) => $chainId === ROPSTEN_ID && !!$selectedAccount
+);
+
 
 (async () => {
   if (!window.ethereum) {
