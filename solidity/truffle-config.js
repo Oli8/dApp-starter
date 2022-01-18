@@ -68,7 +68,8 @@ module.exports = {
       }),
       network_id: 3,       // Ropsten's id
       gas: 4000000,        // Ropsten has a lower block limit than mainnet
-      skipDryRun: true     // Skip dry run before migrations? (default: false for public nets)
+      skipDryRun: true,    // Skip dry run before migrations? (default: false for public nets)
+      disableConfirmationListener: true,
     },
     // Useful for private networks
     // private: {
