@@ -41,3 +41,9 @@
 <main class="paper">
   <Router {routes} />
 </main>
+
+<style lang="scss">
+:global(body) {
+  background-color: dimgrey;
+}
+</style>
