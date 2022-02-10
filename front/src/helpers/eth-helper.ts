@@ -77,6 +77,20 @@ export function fromWei(amount: string): number {
   return Number(utils.formatEther(amount));
 }
 
+// export async function getLogs(eventSignature: string): Promise<any[]> {
+//   const logs = await provider.getLogs({
+//     address: contract.address,
+//     fromBlock: 0,
+//     toBlock: 'latest',
+//     topics: [utils.id(eventSignature)]
+//   });
+
+//   return logs.map(log => {
+//     const parsedLog = contract.interface.parseLog(log);
+//     return parsedLog.args;
+//   });
+// }
+
 // export async function someContractFunction(arg: any): Promise<ContractTransaction> {
 //   return contractWithSigner.someFunction(arg);
 // }
