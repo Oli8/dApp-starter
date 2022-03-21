@@ -7,7 +7,7 @@ export type Address = `0x${string}`;
 const readProvider: providers.InfuraProvider = new providers.InfuraProvider('ropsten');
 // const contract: Contract = new Contract(
 //   SomeContract.address,
-//   SomeContract.ABI,
+//   SomeContract.abi,
 //   readProvider
 // );
 
@@ -27,7 +27,7 @@ let signer: providers.JsonRpcSigner;
 
   // contractWithSigner = new Contract(
     // SomeContract.address,
-    // SomeContract.ABI,
+    // SomeContract.abi,
     // provider
   // ).connect(signer)
 })()
